@@ -1,5 +1,6 @@
 package pagos.payu.infrastructure.adapters;
 
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
@@ -16,6 +17,9 @@ public class AcquirerNetworkService {
 
     @Autowired
     private RestTemplate restTemplate;
+
+    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(FraudValidatorService.class);
+    private static final String LAMBDA_URL_AUTHORIZATION = "http://load-balancer-bank-2134635314.us-east-1.elb.amazonaws.com";
 
     public AuthorizationResponse sendAuthorizationRequestToAcquirerNetwork(AuthorizationRequest authorizationRequest) {
         String url = "https://acquirer-network.example.com/authorize"; // URL de la red externa
